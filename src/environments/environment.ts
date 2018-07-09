@@ -11,19 +11,13 @@ export const environment = {
     client_secret : '8d9bad99-5478-49d7-936b-3724af6b3f72',
     client_id : 'smart-ehr'
   },
-  keycloakWin : {
-    RootUrl: 'http://localhost:8080/auth',
-    authServerUrl: 'http://localhost:8080/auth',
-    realm : 'ReferenceImplementations',
-    client_secret : 'cb97e2d6-73d0-4bb2-b98b-8d48ba3935aa',
-    client_id : 'smart-ehr'
-  },
-  cat : {
+  oauth2 : {
     eprUrl : 'http://127.0.0.1:9090/careconnect-gateway-secure/STU3',
     client_id : 'nhs-smart-ehr',
     client_secret : 'APa5oCe6SHhty_or2q34WpNcq0-X957n6p48TkAJw14YCtmZeQil60XvCfuByIPd8DlXyusxAGxp5_Z5UKlgZJU',
     cookie_domain : 'localhost'
   },
+    login : 'http://localhost:4200',
   smart: {
     cardiac : 'http://127.0.0.1:8000/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch=',
     growthChart : 'http://127.0.0.1:9000/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch='

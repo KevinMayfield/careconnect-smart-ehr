@@ -13,39 +13,17 @@ import {CookieService} from "ngx-cookie";
 })
 export class LogoutComponent implements OnInit {
 
-  logoutRedirect : string = "";
+
 
   constructor(
-      private authService: AuthService
-      ,private activatedRoute: ActivatedRoute
-      ,private router: Router
-      ,private _cookieService:CookieService
-      ,private keycloak : KeycloakService
+    private authService: AuthService
   ) { }
 
   ngOnInit(
   ) {
-    this.logoutRedirect = this.activatedRoute.snapshot.queryParams['afterLogout'];
-    if (this.logoutRedirect === undefined) {
-      console.log(environment.keycloak.authServerUrl+'/realms/'+ environment.keycloak.realm+'/protocol/openid-connect/logout?redirect_uri='
-      + document.baseURI);
-      this.logoutRedirect = environment.keycloak.authServerUrl+'/realms/'+ environment.keycloak.realm+'/protocol/openid-connect/logout?redirect_uri='
-        + document.baseURI;
-    }
-    this._cookieService.remove('ccri-token');
-
     localStorage.removeItem('access_token');
 
-    this.keycloak.logout();
-
-    this.authService.setLocalUser(undefined);
-
-    if (this.logoutRedirect !== undefined) {
-      window.location.href = this.logoutRedirect;
-    }
-
-
-
+    window.location.href = this.authService.getLogonServer()+'logout??afterAuth=' + document.baseURI + '/login';
   }
 
 }

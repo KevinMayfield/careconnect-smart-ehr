@@ -4,6 +4,7 @@ import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FhirService} from "../../service/fhir.service";
 import {EprService} from "../../service/epr.service";
 import {KeycloakService} from "../../service/keycloak.service";
+import {CookieService} from "ngx-cookie";
 
 
 @Component({
@@ -26,13 +27,10 @@ export class LoginComponent implements OnInit {
 
   jwt : any = undefined;
 
-  constructor(private authService: AuthService,
-              private router: Router,
-              private  fhirService : FhirService,
-              private eprService : EprService
-
-              ,private activatedRoute: ActivatedRoute
-              ,public keycloak : KeycloakService
+  constructor(
+      private _cookieService: CookieService,
+      private fhirService: FhirService,
+      private authService: AuthService
     ) {
   }
 
@@ -41,57 +39,20 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
-      this.logonRedirect = this.activatedRoute.snapshot.queryParams['afterAuth'];
+      let jwt: any = undefined;
+      jwt = this._cookieService.get('ccri-token')
+      if (jwt === undefined) {
+          window.location.href = this.authService.getLogonServer()+'/login?afterAuth=' + document.baseURI + '/login';
+      } else {
+          console.log('logged in');
 
-      KeycloakService.init()
-        .then(() => {
-
-          this.onKeyCloakComplete();
-        })
-        .catch(e => console.log('rejected'));
-
-
-  }
-
-  onKeyCloakComplete() {
-    // Check logged in or login
-    this.keycloak.getToken().then(() => {
-
-        // Set up a redirect for completion of OAuth2 login
-        // This should only be called if OAuth2 has not been performed
-
-      this.eprService.userName = KeycloakService.getUsername();
-      this.eprService.userEmail = KeycloakService.getUserEmail();
-
-          this.subscription = this.fhirService.getOAuthChangeEmitter()
-            .subscribe(item => {
-              console.log("The Call back ran");
-              this.router.navigate(['ping']);
-            });
-          this.performLogins();
-
+          this.fhirService.authoriseOAuth2();
       }
-    );
-  }
-
-  performLogins() :void {
 
 
-      // Set a call back for the CookieService
-      this.authService.getCookieEventEmitter()
-          .subscribe(item => {
-
-              if (this.logonRedirect !== undefined) {
-                window.location.href =this.logonRedirect;
-              } else {
-                this.fhirService.authoriseOAuth2();
-              }
-            }
-          );
-
-      this.authService.setCookie();
 
   }
+
 
 
 
