@@ -29,3 +29,13 @@ docker push thorlogic/smart-ehr
 
 docker run -d -p 4200:80 --name ccri-app thorlogic/ccri-app 
 
+
+### Fault finding 
+
+-- run a docker in a loop and then bash into it
+
+docker run --name smart-ehr -d thorlogic/smart-ehr tail -f /dev/null
+
+docker exec smart-ehr sh
+
+

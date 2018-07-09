@@ -1,14 +1,9 @@
 import {EventEmitter, Injectable} from '@angular/core';
-
-
 import {Router} from '@angular/router';
 import {User} from "../model/user";
-import {KeycloakService} from "./keycloak.service";
 import {environment} from "../../environments/environment";
 import {CookieService} from "ngx-cookie";
 import {Oauth2Service} from "./oauth2.service";
-
-
 
 
 @Injectable()
@@ -24,7 +19,7 @@ export class AuthService {
 
   private UserEvent : EventEmitter<User> = new EventEmitter();
 
-  private cookieEvent : EventEmitter<any> = new EventEmitter();
+
 
   public auth : boolean = false;
 
@@ -33,8 +28,8 @@ export class AuthService {
   constructor(
              private router: Router,
              private oauth2 : Oauth2Service,
-             private _cookieService:CookieService,
-             private keycloakService : KeycloakService
+             private _cookieService:CookieService
+
               ) {
 
     this.updateUser();
@@ -59,40 +54,6 @@ export class AuthService {
 
 
 
-  getCookieEventEmitter() {
-
-    return this.cookieEvent;
-  }
-  setCookie() {
-      let jwt: any = undefined;
-      if (this.getCookie() !=undefined) {
-        jwt = this._cookieService.get('ccri-token');
-      } else {
-        if (KeycloakService.auth != undefined && KeycloakService.auth.authz != undefined) {
-          jwt = KeycloakService.auth.authz.token;
-
-          this._cookieService.put('ccri-token', jwt, {
-            domain: this.getCookieDomain(),
-            path: '/',
-            expires: new Date((new Date()).getTime() + 3 * 60000)
-          });
-        }
-      }
-      if (jwt != undefined) {
-        this.cookieEvent.emit(jwt);
-      } else {
-        console.log('jwt not recorded')
-        //this.keycloakService.logout();
-      }
-  }
-
-  getCookieDomain() {
-
-      let cookieDomain :string = 'CAT_COOKIE_DOMAIN';
-      if (cookieDomain.indexOf('CAT_') != -1) cookieDomain = environment.oauth2.cookie_domain;
-      return cookieDomain;
-
-  }
 
     getLogonServer() {
 
@@ -102,15 +63,16 @@ export class AuthService {
 
     }
 
-  getCookie() {
+    getCookie() {
 
-    // This should also include a check for expired cookie, return undefined if it is.
-    return this._cookieService.get('ccri-token');
-  }
+        // This should also include a check for expired cookie, return undefined if it is.
+        return this._cookieService.get('ccri-token');
+    }
 
 
-  getUserEventEmitter() {
-    return this.UserEvent;
+
+    getUserEventEmitter() {
+        return this.UserEvent;
   }
 
   updateUser() {

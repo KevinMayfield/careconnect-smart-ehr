@@ -37,7 +37,6 @@ export class EprComponent implements AfterViewInit {
     private _iconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
     public authService: AuthService,
-              public outh2Service : Oauth2Service,
               private fhirService : FhirService,
               public eprService : EprService,
             ) {
@@ -113,7 +112,7 @@ export class EprComponent implements AfterViewInit {
         this.href = 'epr';
         this.section =section;
       });
-    this.authService.setCookie();
+    //this.authService.setCookie();
   }
 
   ngAfterViewInit(): void {
@@ -162,24 +161,18 @@ export class EprComponent implements AfterViewInit {
 
     let launch : string = undefined;
 
-    this.authService.getCookieEventEmitter().subscribe(
-      ()=> {
-        console.log('Smart Launch Growth Chart');
-        this.fhirService.launchSMART('growth_chart','4ae23017813e417d937e3ba21974581',this.eprService.patient.id).subscribe( response => {
-            launch = response.launch_id;
-            console.log("Returned Launch = "+launch);
-          },
-          (err)=> {
-            console.log(err);
-          },
-          () => {
-            window.open(this.getGrowthChartAppUrl()+launch, "_blank");
-          }
-        );
-
+    console.log('Smart Launch Growth Chart');
+    this.fhirService.launchSMART('growth_chart','4ae23017813e417d937e3ba21974581',this.eprService.patient.id).subscribe( response => {
+        launch = response.launch_id;
+        console.log("Returned Launch = "+launch);
+      },
+      (err)=> {
+        console.log(err);
+      },
+      () => {
+        window.open(this.getGrowthChartAppUrl()+launch, "_blank");
       }
     );
-    this.authService.setCookie();
 
   }
 
@@ -196,23 +189,19 @@ export class EprComponent implements AfterViewInit {
 
     console.log('cardiac app clicked');
 
-    this.authService.getCookieEventEmitter().subscribe(
-      ()=> {
-        console.log('Smart Launch Cardiac');
-        this.fhirService.launchSMART('cardiac_risk', '4ae23017813e417d937e3ba21974582', this.eprService.patient.id).subscribe(response => {
-            launch = response.launch_id;
-            console.log("Returned Lauch = " + launch);
-          },
-          (err) => {
-            console.log(err);
-          },
-          () => {
-            window.open(this.getCardiacAppUrl() + launch, "_blank");
-          }
-        );
+
+    console.log('Smart Launch Cardiac');
+    this.fhirService.launchSMART('cardiac_risk', '4ae23017813e417d937e3ba21974582', this.eprService.patient.id).subscribe(response => {
+        launch = response.launch_id;
+        console.log("Returned Lauch = " + launch);
+      },
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        window.open(this.getCardiacAppUrl() + launch, "_blank");
       }
-    )
-    this.authService.setCookie();
+    );
 
   }
 

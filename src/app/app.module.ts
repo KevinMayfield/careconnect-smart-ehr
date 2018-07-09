@@ -84,7 +84,6 @@ import {AuthService} from "./service/auth.service";
 import {LinksService} from "./service/links.service";
 import {EprService} from "./service/epr.service";
 import {AuthGuard} from "./service/auth-guard";
-import {KeycloakService} from "./service/keycloak.service";
 import {Oauth2Service} from "./service/oauth2.service";
 import {BundleService} from "./service/bundle.service";
 import {ErrorsHandler} from "./service/errors-handler";
@@ -221,7 +220,6 @@ import {ResourceDialogComponent} from "./dialog/resource-dialog/resource-dialog.
     ,EprService
     ,AuthGuard
     ,CookieService
-    ,KeycloakService
     ,Oauth2Service
     ,BundleService
     ,MatIconRegistry,

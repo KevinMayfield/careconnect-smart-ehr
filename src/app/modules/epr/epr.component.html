@@ -109,6 +109,15 @@
               <a mat-list-item (click)="selectSection('prescriptions')" ngbTooltip="Medications"><mat-icon>colorize</mat-icon>
                 <span *ngIf="!miniNav" class="push-left-sm">Medications</span>
               </a>
+                <mat-divider></mat-divider>
+                <mat-list-item ngbTooltip="SMART on FHIR Apps"><mat-icon>apps</mat-icon><span *ngIf="!miniNav" class="push-left-sm">SMART Apps</span></mat-list-item>
+                <mat-divider></mat-divider>
+                 <a mat-list-item (click)="growthApp()" ngbTooltip="Growth"><mat-icon>trending_up</mat-icon>
+                    <span *ngIf="!miniNav" class="push-left-sm">Growth Chart</span>
+                </a>
+                <a mat-list-item (click)="cardiacApp()" ngbTooltip="Cardiac Risk"><mat-icon>battery_unknown</mat-icon>
+                    <span *ngIf="!miniNav" class="push-left-sm">Cardiac Risk</span>
+                </a>
             </span>
 
           </mat-nav-list>

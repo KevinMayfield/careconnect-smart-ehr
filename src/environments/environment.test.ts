@@ -12,7 +12,8 @@ export const environment = {
     client_secret : 'KEYCLOAK_CLIENT_SECRET',
     client_id : 'ccri-cat'
   },
-  cat : {
+    login : 'LOGIN_URL',
+  oauth2 : {
     eprUrl : 'https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3',
     client_id : 'nhs-smart-ehr',
     client_secret : 'SMART_OAUTH2_CLIENT_SECRET',

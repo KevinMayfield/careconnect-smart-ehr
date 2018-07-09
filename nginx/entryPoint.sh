@@ -20,6 +20,6 @@ sed -i "s~SMART_CARDIAC_URL~$SMART_CARDIAC_URL~g" /usr/share/nginx/html/smart/ma
 
 sed -i "s~SMART_GROWTH_CHART_URL~$SMART_GROWTH_CHART_URL~g" /usr/share/nginx/html/smart/main.js
 
-sed -i "s/LOGIN_URL/$LOGIN_URL/g" /usr/share/nginx/html/smart/main.js
+sed -i "s~LOGIN_URL~$LOGIN_URL~g" /usr/share/nginx/html/smart/main.js
 
 exec "$@"

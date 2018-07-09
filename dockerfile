@@ -3,6 +3,8 @@
 # We label our stage as 'builder'
 FROM node:8.11.3-alpine as builder
 
+# RUN apk add --no-cache bash
+
 COPY package.json package-lock.json ./
 
 RUN npm set progress=false && npm config set depth 0 && npm cache clean --force
@@ -29,7 +31,7 @@ COPY nginx/default.conf /etc/nginx/conf.d/
 RUN rm -rf /usr/share/nginx/html/*
 
 ## From 'builder' stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=builder /ng-app/dist/smart-epr /usr/share/nginx/html/
+COPY --from=builder /ng-app/dist/smart-epr /usr/share/nginx/html/smart
 
 # Copy the EntryPoint
 COPY nginx/entryPoint.sh /
