@@ -21,6 +21,7 @@ export const environment = {
   },
   smart: {
     cardiac : 'https://purple.testlab.nhs.uk/cardiac/launch.html?iss=https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3&launch=',
-    growthChart : 'https://purple.testlab.nhs.uk/gc/launch.html?iss=https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3&launch='
+    growthChart : 'https://purple.testlab.nhs.uk/gc/launch.html?iss=https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3&launch=',
+      bpCentiles : 'https://purple.testlab.nhs.uk/bp/launch.html?iss=https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3&launch='
   }
 };

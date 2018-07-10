@@ -20,7 +20,8 @@ export const environment = {
     login : 'http://localhost:4200',
   smart: {
     cardiac : 'http://127.0.0.1:8000/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch=',
-    growthChart : 'http://127.0.0.1:9000/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch='
+    growthChart : 'http://127.0.0.1:9000/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch=',
+      bpCentiles : 'http://127.0.0.1:8001/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch='
   }
 };
 

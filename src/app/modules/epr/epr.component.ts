@@ -205,6 +205,27 @@ export class EprComponent implements AfterViewInit {
 
   }
 
+    bpApp() {
+
+        let launch : string = undefined;
+
+        console.log('bp centile app clicked');
+
+        console.log('Smart Launch BP Centile');
+        this.fhirService.launchSMART('bp_centiles', '4ae23017813e417d937e3ba21974582', this.eprService.patient.id).subscribe(response => {
+                launch = response.launch_id;
+                console.log("Returned Lauch = " + launch);
+            },
+            (err) => {
+                console.log(err);
+            },
+            () => {
+                window.open(this.getBPAppUrl() + launch, "_blank");
+            }
+        );
+
+    }
+
   getCardiacAppUrl() : string {
     // This is a marker for entryPoint.sh to replace
     let url :string = 'SMART_CARDIAC_URL';
@@ -218,6 +239,13 @@ export class EprComponent implements AfterViewInit {
     if (url.indexOf('SMART_GROWTH_CHART') != -1) url = environment.smart.growthChart;
     return url;
   }
+
+    getBPAppUrl() : string {
+        // This is a marker for entryPoint.sh to replace
+        let url :string = 'SMART_BP_CENTILES_URL';
+        if (url.indexOf('SMART_BP_CENTILES') != -1) url = environment.smart.bpCentiles;
+        return url;
+    }
 
   getLastName(patient :fhir.Patient) : String {
     if (patient == undefined) return "";
