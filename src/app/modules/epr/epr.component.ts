@@ -69,6 +69,14 @@ export class EprComponent implements AfterViewInit {
   },
   ];
 
+
+    // Theme toggle
+    get activeTheme(): string {
+        return localStorage.getItem('theme');
+    }
+    theme(theme: string): void {
+        localStorage.setItem('theme', theme);
+    }
   name="SMART-on-FHIR EPR";
 
   patient : fhir.Patient;
@@ -94,6 +102,9 @@ export class EprComponent implements AfterViewInit {
 
 
    // TODO Get UserDetails from Token console.log('token '+this.outh2Service.getUser());
+      this.theme('theme-light');
+      //'theme-light'
+
 
     this.subUser = this.authService.getUserEventEmitter()
       .subscribe(item => {
@@ -175,6 +186,44 @@ export class EprComponent implements AfterViewInit {
     );
 
   }
+
+    dev1App() {
+
+        let launch : string = undefined;
+
+        console.log('Developer App1');
+        this.fhirService.launchSMART('diabetes','4ae23017813e417d937e3ba21974581',this.eprService.patient.id).subscribe( response => {
+                launch = response.launch_id;
+                console.log("Returned Launch = "+launch);
+            },
+            (err)=> {
+                console.log(err);
+            },
+            () => {
+                window.open('http://localhost:4202/launch?iss=https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3&launch='+launch, "_blank");
+            }
+        );
+
+    }
+
+    dev2App() {
+
+        let launch : string = undefined;
+
+        console.log('Developer App2');
+        this.fhirService.launchSMART('child_measurements','4ae23017813e417d937e3ba21974581',this.eprService.patient.id).subscribe( response => {
+                launch = response.launch_id;
+                console.log("Returned Launch = "+launch);
+            },
+            (err)=> {
+                console.log(err);
+            },
+            () => {
+                window.open('http://127.0.0.1:4000/child-measurements/launch?iss=https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3&launch='+launch, "_blank");
+            }
+        );
+
+    }
 
   selectPatient(patient : fhir.Patient) {
     if (patient !=undefined) {

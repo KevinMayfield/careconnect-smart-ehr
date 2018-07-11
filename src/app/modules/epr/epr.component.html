@@ -1,4 +1,4 @@
-<td-layout [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'push'" [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '240px' : '100%'" >
+<td-layout [mode]="(media.registerQuery('gt-sm') | async) ? 'side' : 'push'" [sidenavWidth]="(media.registerQuery('gt-xs') | async) ? '240px' : '100%'" [class]="activeTheme" >
   <td-navigation-drawer flex [sidenavTitle]="name" >
     <mat-nav-list [tdLayoutClose]="!media.query('gt-sm')">
       <span *ngFor="let item of btnRoutes">
@@ -120,6 +120,12 @@
                 </a>
                  <a mat-list-item (click)="bpApp()" ngbTooltip="BP Centiles"><mat-icon>list</mat-icon>
                     <span *ngIf="!miniNav" class="push-left-sm">Cardiac Risk</span>
+                </a>
+                  <a mat-list-item (click)="dev1App()" ngbTooltip="http://localhost:4202"><mat-icon>desktop_mac</mat-icon>
+                    <span *ngIf="!miniNav" class="push-left-sm">Developer App1</span>
+                </a>
+                  <a mat-list-item (click)="dev2App()" ngbTooltip="http://localhost:4202"><mat-icon>computer</mat-icon>
+                    <span *ngIf="!miniNav" class="push-left-sm">Developer App2</span>
                 </a>
             </span>
 
