@@ -1,0 +1,15 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+      <mat-card *ngFor="let card of cards" fxFlex="50%">
+        <mat-card-title-group>
+          <mat-card-title>{{card.name}}</mat-card-title>
+          <img mat-card-sm-image src="{{card.image}}" size="50px">
+        </mat-card-title-group>
+      <mat-card-content flex>
+        {{card.notes}}
+      </mat-card-content>
+          <mat-card-footer flex>
+              <button mat-button color="accent" (click)="smartApp(card.url)">Launch App</button>
+          </mat-card-footer>
+          <!-- <mat-card-footer>{{card.source}}</mat-card-footer> -->
+    </mat-card>
+</div>

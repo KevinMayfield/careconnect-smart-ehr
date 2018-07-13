@@ -89,6 +89,8 @@ import {BundleService} from "./service/bundle.service";
 import {ErrorsHandler} from "./service/errors-handler";
 import {TokenInterceptor} from "./service/token-interceptor";
 import {ResourceDialogComponent} from "./dialog/resource-dialog/resource-dialog.component";
+import { SmartAppsComponent } from './modules/smart-apps/smart-apps.component';
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -143,7 +145,8 @@ import {ResourceDialogComponent} from "./dialog/resource-dialog/resource-dialog.
     BinaryComponent,
     PractitionerRoleDialogComponent,
     EncounterDialogComponent,
-    PingComponent
+    PingComponent,
+    SmartAppsComponent
   ],
    entryComponents: [
     ResourceDialogComponent,
@@ -158,6 +161,7 @@ import {ResourceDialogComponent} from "./dialog/resource-dialog/resource-dialog.
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+      FlexLayoutModule,
     RouterModule.forRoot([]),
     CookieModule
       .forRoot(),

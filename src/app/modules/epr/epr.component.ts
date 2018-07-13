@@ -126,6 +126,9 @@ export class EprComponent implements AfterViewInit {
     //this.authService.setCookie();
   }
 
+  smartApps() {
+      this.href = 'smart';
+  }
   ngAfterViewInit(): void {
     // broadcast to all listener observables when loading the page
     this.media.broadcast();
@@ -167,7 +170,7 @@ export class EprComponent implements AfterViewInit {
   menuToggle() {
       this.showMenu = !this.showMenu;
   }
-
+/*
   growthApp() {
 
     let launch : string = undefined;
@@ -224,14 +227,14 @@ export class EprComponent implements AfterViewInit {
         );
 
     }
-
+*/
   selectPatient(patient : fhir.Patient) {
     if (patient !=undefined) {
       this.eprService.set(patient);
       this.href='epr';
     }
   }
-
+/*
   cardiacApp() {
 
     let launch : string = undefined;
@@ -295,7 +298,7 @@ export class EprComponent implements AfterViewInit {
         if (url.indexOf('SMART_BP_CENTILES') != -1) url = environment.smart.bpCentiles;
         return url;
     }
-
+*/
   getLastName(patient :fhir.Patient) : String {
     if (patient == undefined) return "";
     if (patient.name == undefined || patient.name.length == 0)

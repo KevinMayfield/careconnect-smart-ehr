@@ -113,8 +113,11 @@
                 <span *ngIf="!miniNav" class="push-left-sm">Medications</span>
               </a>
                 <mat-divider></mat-divider>
-                <mat-list-item ngbTooltip="SMART on FHIR Apps"><mat-icon>apps</mat-icon><span *ngIf="!miniNav" class="push-left-sm">SMART Apps</span></mat-list-item>
+                <a mat-list-item (click)="smartApps()" ngbTooltip="SMART on FHIR"><mat-icon>apps</mat-icon>
+                    <span *ngIf="!miniNav" class="push-left-sm">SMART Apps</span>
+                </a>
                 <mat-divider></mat-divider>
+                <!--
                  <a mat-list-item (click)="growthApp()" ngbTooltip="Growth"><mat-icon>trending_up</mat-icon>
                     <span *ngIf="!miniNav" class="push-left-sm">Growth Chart</span>
                 </a>
@@ -130,6 +133,7 @@
                   <a mat-list-item (click)="dev2App()" ngbTooltip="http://localhost:4202"><mat-icon>computer</mat-icon>
                     <span *ngIf="!miniNav" class="push-left-sm">Developer App2</span>
                 </a>
+                -->
             </span>
 
           </mat-nav-list>
@@ -196,7 +200,9 @@
             <app-patient-epr-patient-record [section]="section"></app-patient-epr-patient-record>
           </span>
 
-
+            <span *ngIf="href=='smart'">
+                <app-smart-apps></app-smart-apps>
+            </span>
 
           <span *ngIf="href=='patient'">
              <mat-card>
