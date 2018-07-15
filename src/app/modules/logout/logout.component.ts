@@ -19,7 +19,7 @@ export class LogoutComponent implements OnInit {
   ) {
     localStorage.removeItem('access_token');
 
-    window.location.href = this.authService.getLogonServer()+'/logout??afterAuth=' + document.baseURI + '/login';
+    window.location.href = this.authService.getLogonServer()+'/logout?afterAuth=' + document.baseURI + '/login';
   }
 
 }
