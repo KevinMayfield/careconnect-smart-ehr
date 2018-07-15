@@ -23,7 +23,7 @@ export const environment = {
         {
             name: 'Cardiac',
             image: 'http://res.cloudinary.com/hvhxvnxtg/hrmkhyspg4vwptt5frzp',
-            url: 'https://purple.testlab.nhs.uk/cardiac/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch=',
+            url: 'https://purple.testlab.nhs.uk/cardiac/launch.html',
             notes: 'The widely-used Reynolds Risk Score is used to estimate the 10-year cardiovascular risk of an individual. For patients and clinicians alike, this calculation is often reported in an esoteric, hard-to-read lab report.',
             source : 'Boston Children Hospital'
         },
