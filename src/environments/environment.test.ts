@@ -24,21 +24,21 @@ export const environment = {
             name: 'Cardiac',
             image: 'http://res.cloudinary.com/hvhxvnxtg/hrmkhyspg4vwptt5frzp',
             url: 'https://purple.testlab.nhs.uk/cardiac/launch.html',
-            notes: 'The widely-used Reynolds Risk Score is used to estimate the 10-year cardiovascular risk of an individual. For patients and clinicians alike, this calculation is often reported in an esoteric, hard-to-read lab report.',
+            notes: 'The widely-used Reynolds Risk Score is used to estimate the 10-year cardiovascular risk of an individual. For patients and clinicians alike, this calculation is often reported in an esoteric, hard-to-read lab report. Uses LOINC.',
             source : 'Boston Children Hospital'
         },
         {
             name: 'Growth Chart',
             image: 'http://res.cloudinary.com/hvhxvnxtg/ywqghaezona4svfhiauq',
             url: 'https://purple.testlab.nhs.uk/gc/launch.html',
-            notes: 'Interactive chart of childs growth over time',
+            notes: 'Interactive chart of childs growth over time. Uses SNOMED CT.',
             source : 'Boston Children Hospital'
         },
         {
             name: 'BP Centiles',
             image: 'http://res.cloudinary.com/hvhxvnxtg/jbhe0nfyl9tp5j4cueac',
             url: 'https://purple.testlab.nhs.uk/bp/launch.html',
-            notes: 'BP Centiles app, includes a modern and responsive touch-friendly interface for tablets with light and dark themes.',
+            notes: 'BP Centiles app, includes a modern and responsive touch-friendly interface for tablets with light and dark themes. Uses SNOMED CT.',
             source : 'Boston Children Hospital'
         },
         {
