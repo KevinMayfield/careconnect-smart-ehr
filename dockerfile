@@ -1,7 +1,7 @@
 ### STAGE 1: Build ###
 
 # We label our stage as 'builder'
-FROM node:8.11.3-alpine as builder
+FROM node:8.11.3 as builder
 
 # RUN apk add --no-cache bash
 
