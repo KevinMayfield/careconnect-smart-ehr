@@ -170,135 +170,14 @@ export class EprComponent implements AfterViewInit {
   menuToggle() {
       this.showMenu = !this.showMenu;
   }
-/*
-  growthApp() {
 
-    let launch : string = undefined;
-
-    console.log('Smart Launch Growth Chart');
-    this.fhirService.launchSMART('growth_chart','4ae23017813e417d937e3ba21974581',this.eprService.patient.id).subscribe( response => {
-        launch = response.launch_id;
-        console.log("Returned Launch = "+launch);
-      },
-      (err)=> {
-        console.log(err);
-      },
-      () => {
-        window.open(this.getGrowthChartAppUrl()+launch, "_blank");
-      }
-    );
-
-  }
-
-    dev1App() {
-
-        let launch : string = undefined;
-
-        console.log('Developer App1');
-        this.fhirService.launchSMART('diabetes','4ae23017813e417d937e3ba21974581',this.eprService.patient.id).subscribe( response => {
-                launch = response.launch_id;
-                console.log("Returned Launch = "+launch);
-            },
-            (err)=> {
-                console.log(err);
-            },
-            () => {
-                window.open('http://localhost:4202/launch?iss=https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3&launch='+launch, "_blank");
-            }
-        );
-
-    }
-
-    dev2App() {
-
-        let launch : string = undefined;
-
-        console.log('Developer App2');
-        this.fhirService.launchSMART('child_measurements','4ae23017813e417d937e3ba21974581',this.eprService.patient.id).subscribe( response => {
-                launch = response.launch_id;
-                console.log("Returned Launch = "+launch);
-            },
-            (err)=> {
-                console.log(err);
-            },
-            () => {
-                window.open('http://127.0.0.1:4000/child-measurements/launch?iss=https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3&launch='+launch, "_blank");
-            }
-        );
-
-    }
-*/
   selectPatient(patient : fhir.Patient) {
     if (patient !=undefined) {
       this.eprService.set(patient);
       this.href='epr';
     }
   }
-/*
-  cardiacApp() {
 
-    let launch : string = undefined;
-
-    console.log('cardiac app clicked');
-
-
-    console.log('Smart Launch Cardiac');
-    this.fhirService.launchSMART('cardiac_risk', '4ae23017813e417d937e3ba21974582', this.eprService.patient.id).subscribe(response => {
-        launch = response.launch_id;
-        console.log("Returned Lauch = " + launch);
-      },
-      (err) => {
-        console.log(err);
-      },
-      () => {
-        window.open(this.getCardiacAppUrl() + launch, "_blank");
-      }
-    );
-
-  }
-
-    bpApp() {
-
-        let launch : string = undefined;
-
-        console.log('bp centile app clicked');
-
-        console.log('Smart Launch BP Centile');
-        this.fhirService.launchSMART('bp_centiles', '4ae23017813e417d937e3ba21974582', this.eprService.patient.id).subscribe(response => {
-                launch = response.launch_id;
-                console.log("Returned Lauch = " + launch);
-            },
-            (err) => {
-                console.log(err);
-            },
-            () => {
-                window.open(this.getBPAppUrl() + launch, "_blank");
-            }
-        );
-
-    }
-
-  getCardiacAppUrl() : string {
-    // This is a marker for entryPoint.sh to replace
-    let url :string = 'SMART_CARDIAC_URL';
-    if (url.indexOf('SMART_CARDIAC') != -1) url = environment.smart.cardiac;
-    return url;
-  }
-
-  getGrowthChartAppUrl() : string {
-    // This is a marker for entryPoint.sh to replace
-    let url :string = 'SMART_GROWTH_CHART_URL';
-    if (url.indexOf('SMART_GROWTH_CHART') != -1) url = environment.smart.growthChart;
-    return url;
-  }
-
-    getBPAppUrl() : string {
-        // This is a marker for entryPoint.sh to replace
-        let url :string = 'SMART_BP_CENTILES_URL';
-        if (url.indexOf('SMART_BP_CENTILES') != -1) url = environment.smart.bpCentiles;
-        return url;
-    }
-*/
   getLastName(patient :fhir.Patient) : String {
     if (patient == undefined) return "";
     if (patient.name == undefined || patient.name.length == 0)
