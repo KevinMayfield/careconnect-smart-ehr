@@ -13,14 +13,24 @@
         <mat-form-field>
             <input matInput type="url" placeholder="App Launch URI" formControlName="appLaunch" value="{{appLaunch}}">
         </mat-form-field>
-        <div *ngIf="registerForm.controls['appLaunch'].errors" class="alert alert-danger">
-            Problemo!
+        <div *ngIf="registerForm.controls['appLaunch'].errors && registerForm.controls['appLaunch'].touched">
+            <mat-error *ngIf="registerForm.controls['appLaunch'].hasError('required')">
+                Application Launch url is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls['appLaunch'].hasError('pattern')">
+                Valid url is <strong>required</strong>
+            </mat-error>
         </div>
         <mat-form-field>
             <textarea matInput type="url" placeholder="App Redirect URIs" formControlName="appRedirect" value="{{appRedirect}}"></textarea>
         </mat-form-field>
-        <div *ngIf="registerForm.controls['appRedirect'].errors" class="alert alert-danger">
-            Problemo!
+        <div *ngIf="registerForm.controls['appRedirect'].errors && registerForm.controls['appRedirect'].touched">
+            <mat-error *ngIf="registerForm.controls['appRedirect'].hasError('required')">
+                Application Redirect Url is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="registerForm.controls['appRedirect'].hasError('pattern')">
+                Valid url is <strong>required</strong>
+            </mat-error>
         </div>
         Note: If you provide one or more redirect URIs, your client code must send one of the provided values when performing OAuth2 authorization or you will receive an "Invalid redirect" error.
         <td-file-upload #singleFileUpload  (select)="selectEvent($event)" (upload)="uploadEvent($event)" (cancel)="cancelEvent()">
