@@ -8,9 +8,11 @@ import {FhirService} from "../../service/fhir.service";
 import {environment} from "../../../environments/environment";
 import {TdDigitsPipe, TdLayoutManageListComponent, TdMediaService, TdRotateAnimation} from "@covalent/core";
 import {DatePipe} from "@angular/common";
-import {MatDialog, MatIconRegistry} from "@angular/material";
+import {MatDialog, MatDialogConfig, MatDialogRef, MatIconRegistry} from "@angular/material";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Oauth2Service} from "../../service/oauth2.service";
+import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
+import {RegisterSmartComponent} from "../../dialog/register-smart/register-smart.component";
 
 @Component({
   selector: 'app-epr',
@@ -176,6 +178,18 @@ export class EprComponent implements AfterViewInit {
       this.eprService.set(patient);
       this.href='epr';
     }
+  }
+
+  registerApp() {
+      const dialogConfig = new MatDialogConfig();
+
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.data = {
+
+      };
+      let resourceDialog : MatDialogRef<RegisterSmartComponent> = this.dialog.open( RegisterSmartComponent, dialogConfig);
+
   }
 
   getLastName(patient :fhir.Patient) : String {

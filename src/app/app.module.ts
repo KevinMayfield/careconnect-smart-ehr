@@ -53,10 +53,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CovalentHttpModule} from "@covalent/http";
 import {CovalentHighlightModule} from "@covalent/highlight";
 import {
-  CovalentDialogsModule, CovalentJsonFormatterModule, CovalentLayoutModule,
-  CovalentMediaModule,
-  CovalentMenuModule,
-  CovalentNotificationsModule
+    CovalentDialogsModule, CovalentFileModule, CovalentJsonFormatterModule, CovalentLayoutModule,
+    CovalentMediaModule,
+    CovalentMenuModule,
+    CovalentNotificationsModule
 } from "@covalent/core";
 import {CovalentMarkdownModule} from "@covalent/markdown";
 import {CookieModule, CookieService} from "ngx-cookie";
@@ -91,6 +91,7 @@ import {TokenInterceptor} from "./service/token-interceptor";
 import {ResourceDialogComponent} from "./dialog/resource-dialog/resource-dialog.component";
 import { SmartAppsComponent } from './modules/smart-apps/smart-apps.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {RegisterSmartComponent} from "./dialog/register-smart/register-smart.component";
 
 @NgModule({
   declarations: [
@@ -146,7 +147,9 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     PractitionerRoleDialogComponent,
     EncounterDialogComponent,
     PingComponent,
-    SmartAppsComponent
+    SmartAppsComponent,
+      RegisterSmartComponent
+
   ],
    entryComponents: [
     ResourceDialogComponent,
@@ -156,7 +159,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     PractitionerDialogComponent,
     OrganisationDialogComponent,
     PractitionerRoleDialogComponent,
-    EncounterDialogComponent
+    EncounterDialogComponent,
+       RegisterSmartComponent
   ],
   imports: [
     BrowserModule,
@@ -207,7 +211,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     CovalentMenuModule,
     CovalentDialogsModule,
     CovalentMediaModule,
-    CovalentNotificationsModule
+    CovalentNotificationsModule,
+      CovalentFileModule
 
     // CovalentFileModule
 

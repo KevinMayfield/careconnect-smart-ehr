@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {FhirService} from "../../service/fhir.service";
 import {EprService} from "../../service/epr.service";
+import {RegisterSmartComponent} from "../../dialog/register-smart/register-smart.component";
+import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
 
 @Component({
   selector: 'app-smart-apps',
@@ -10,7 +12,9 @@ import {EprService} from "../../service/epr.service";
 })
 export class SmartAppsComponent implements OnInit {
 
-  constructor(private fhirService: FhirService, private eprService: EprService) { }
+  constructor(private fhirService: FhirService,
+              public dialog: MatDialog,
+              private eprService: EprService) { }
 
   ngOnInit() {
 
@@ -36,6 +40,18 @@ export class SmartAppsComponent implements OnInit {
                 window.open(url + '?iss=' + this.fhirService.getEPRUrl() + '&launch=' + launch, "_blank");
             }
         );
+
+    }
+
+    registerApp() {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+
+        };
+        let resourceDialog : MatDialogRef<RegisterSmartComponent> = this.dialog.open( RegisterSmartComponent, dialogConfig);
 
     }
 

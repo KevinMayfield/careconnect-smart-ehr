@@ -1,3 +1,8 @@
+<div layout="row" layout-fill>
+    <mat-toolbar>
+        <button mat-icon-button color="accent" (click)="registerApp()"><mat-icon>add_circle</mat-icon> Register SMART App</button>
+    </mat-toolbar>
+</div>
 <mat-grid-list cols="4"  rowHeight="250px" gutterSize="20px">
     <mat-grid-tile  *ngFor="let card of cards">
         <mat-card [style.minHeight]="'100%'" [style.minWidth]="'100%'">

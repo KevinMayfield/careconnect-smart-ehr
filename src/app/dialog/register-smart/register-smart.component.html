@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Register a SMART on FHIR App</h2>
+<mat-dialog-content>
+
+    <form [formGroup]="registerForm"  class="example-container" >
+        <mat-form-field>
+            <input matInput placeholder="App Name" name="appName" formControlName="appName" value="{{appName}}">
+        </mat-form-field>
+        <div *ngIf="registerForm.controls['appName'].errors && registerForm.controls['appName'].touched">
+            <mat-error *ngIf="registerForm.controls['appName'].hasError('required')">
+                Application name is <strong>required</strong>
+            </mat-error>
+        </div>
+        <mat-form-field>
+            <input matInput type="url" placeholder="App Launch URI" formControlName="appLaunch" value="{{appLaunch}}">
+        </mat-form-field>
+        <div *ngIf="registerForm.controls['appLaunch'].errors" class="alert alert-danger">
+            Problemo!
+        </div>
+        <mat-form-field>
+            <textarea matInput type="url" placeholder="App Redirect URIs" formControlName="appRedirect" value="{{appRedirect}}"></textarea>
+        </mat-form-field>
+        <div *ngIf="registerForm.controls['appRedirect'].errors" class="alert alert-danger">
+            Problemo!
+        </div>
+        Note: If you provide one or more redirect URIs, your client code must send one of the provided values when performing OAuth2 authorization or you will receive an "Invalid redirect" error.
+        <td-file-upload #singleFileUpload  (select)="selectEvent($event)" (upload)="uploadEvent($event)" (cancel)="cancelEvent()">
+            <mat-icon>file_upload</mat-icon><span>{{ singleFileUpload.value?.name }}</span>
+            <ng-template td-file-input-label>
+                <mat-icon>attach_file</mat-icon>
+                <span>
+      Choose a file...
+      <span [hidden]="!singleFileUpload?.required">*</span>
+                </span>
+            </ng-template>
+        </td-file-upload>
+        <br>
+        <p>Form value: {{ registerForm.value | json }}</p>
+    </form>
+
+    <!-- formControlName="files" -->
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button [disabled]="registerForm.invalid" [mat-dialog-close]="true">Ok</button>
+</mat-dialog-actions>
