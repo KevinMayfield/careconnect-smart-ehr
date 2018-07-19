@@ -19,6 +19,12 @@ export class SmartAppsComponent implements OnInit {
   ngOnInit() {
 
     this.cards = environment.apps;
+
+
+    this.fhirService.getClients().subscribe( clients => {
+        console.log(clients);
+    })
+
   }
 
   cards = [];

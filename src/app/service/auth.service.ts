@@ -75,7 +75,7 @@ export class AuthService {
         return this.UserEvent;
   }
 
-  updateUser() {
+    updateUser() {
 
 
       let basicUser = new User();
@@ -83,8 +83,30 @@ export class AuthService {
       basicUser.cat_access_token = this.oauth2.getToken();
 
       this.setLocalUser(basicUser);
-  }
+    }
+    getCookieDomain() {
 
+        let cookieDomain :string = 'CAT_COOKIE_DOMAIN';
+        if (cookieDomain.indexOf('CAT_') != -1) cookieDomain = environment.oauth2.cookie_domain;
+        return cookieDomain;
+
+    }
+    setCookie() {
+
+       if (this._cookieService.get('hspc-token') !== undefined) {
+           this._cookieService.put('ccri-token', this._cookieService.get('hspc-token'), {
+               domain: this.getCookieDomain(),
+               path: '/',
+               expires: new Date((new Date()).getTime() + 3 * 60000)
+           });
+       } else {
+           this._cookieService.put('ccri-token', localStorage.getItem('ccri-jwt'), {
+               domain: this.getCookieDomain(),
+               path: '/',
+               expires: new Date((new Date()).getTime() + 3 * 60000)
+           });
+       }
+    }
 
 
 

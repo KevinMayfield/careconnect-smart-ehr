@@ -39,10 +39,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
       let jwt: any = undefined;
-      jwt = this._cookieService.get('ccri-token')
+      jwt = this._cookieService.get('ccri-token');
       if (jwt === undefined) {
           window.location.href = this.authService.getLogonServer()+'/login?afterAuth=' + document.baseURI + '/login';
       } else {
+
+          localStorage.setItem('ccri-jwt',this._cookieService.get('ccri-token'));
           console.log('logged in');
 
           this.fhirService.authoriseOAuth2();

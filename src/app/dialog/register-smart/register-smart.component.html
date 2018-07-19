@@ -34,6 +34,15 @@
         </div>
         Note: If you provide one or more redirect URIs, your client code must send one of the provided values when performing OAuth2 authorization or you will receive an "Invalid redirect" error.
         <br>
+        <mat-form-field>
+            <input matInput type="url" placeholder="Logo URI" formControlName="appLogo" value="{{appLogo}}">
+        </mat-form-field>
+        <div *ngIf="registerForm.controls['appLogo'].errors && registerForm.controls['appLogo'].touched">
+            <mat-error *ngIf="registerForm.controls['appLaunch'].hasError('pattern')">
+                Valid url is <strong>required</strong>
+            </mat-error>
+        </div>
+        <!--
         <td-file-upload #singleFileUpload formContolName="files" (select)="selectEvent($event)" (upload)="uploadEvent($event)" (cancel)="cancelEvent()">
             <mat-icon>file_upload</mat-icon><span>{{ singleFileUpload.value?.name }}</span>
             <ng-template td-file-input-label>
@@ -43,7 +52,7 @@
       <span [hidden]="!singleFileUpload?.required">*</span>
                 </span>
             </ng-template>
-        </td-file-upload>
+        </td-file-upload> -->
         <br>
 
     </form>

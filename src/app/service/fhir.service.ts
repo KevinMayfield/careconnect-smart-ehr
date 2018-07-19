@@ -155,7 +155,28 @@ export class FhirService {
   }
 
 
-    performRegisterSMARTApp(clientName: string, clientURI: string, redirect: string[], ): Observable<any> {
+  getClients() {
+
+     this.authService.setCookie();
+
+      if (this.registerUri === undefined) {
+          this.registerUri = localStorage.getItem("registerUri");
+      }
+      let url = this.registerUri.replace('register','');
+      url = url + 'client/api';
+      console.log('url = '+url);
+
+      let bearerToken = 'Basic '+btoa(environment.oauth2.client_id+":"+this.getCatClientSecret());
+
+      let headers = new HttpHeaders({'Authorization': bearerToken });
+      headers= headers.append('Content-Type','application/json');
+      headers = headers.append('Accept','application/json');
+
+
+      return this.http.get(url, {'headers' : headers }  );
+  }
+
+    performRegisterSMARTApp(clientName: string, clientURI: string, redirect: string[], logo: string ): Observable<any> {
         if (this.registerUri === undefined) {
             this.registerUri = localStorage.getItem("registerUri");
         }
@@ -174,7 +195,9 @@ export class FhirService {
             redirect_uris : redirect,
             client_uri : clientURI,
             grant_types: ["authorization_code"],
-            scope: "user/*.read user/*.read profile"
+            scope: "user/*.read user/*.read profile",
+            token_endpoint_auth_method: 'none',
+            logo_uri: logo
         });
 
         console.log(payload);
