@@ -92,6 +92,7 @@ import {ResourceDialogComponent} from "./dialog/resource-dialog/resource-dialog.
 import { SmartAppsComponent } from './modules/smart-apps/smart-apps.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {RegisterSmartComponent} from "./dialog/register-smart/register-smart.component";
+import {RegisterSmartSecretComponent} from "./dialog/register-smart-secret/register-smart-secret.component";
 
 @NgModule({
   declarations: [
@@ -148,7 +149,8 @@ import {RegisterSmartComponent} from "./dialog/register-smart/register-smart.com
     EncounterDialogComponent,
     PingComponent,
     SmartAppsComponent,
-      RegisterSmartComponent
+      RegisterSmartComponent,
+      RegisterSmartSecretComponent
 
   ],
    entryComponents: [
@@ -160,7 +162,8 @@ import {RegisterSmartComponent} from "./dialog/register-smart/register-smart.com
     OrganisationDialogComponent,
     PractitionerRoleDialogComponent,
     EncounterDialogComponent,
-       RegisterSmartComponent
+       RegisterSmartComponent,
+       RegisterSmartSecretComponent
   ],
   imports: [
     BrowserModule,

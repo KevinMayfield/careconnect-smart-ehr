@@ -131,6 +131,7 @@ export class FhirService {
 
     localStorage.setItem("authoriseUri", this.authoriseUri);
     localStorage.setItem("tokenUri", this.tokenUri);
+    localStorage.setItem("registerUri", this.registerUri);
 
     if (this.oauth2service.getToken() !== undefined) {
       // access token is present so forgo access token retrieval
@@ -153,6 +154,33 @@ export class FhirService {
 
   }
 
+
+    performRegisterSMARTApp(clientName: string, clientURI: string, redirect: string[], ): Observable<any> {
+        if (this.registerUri === undefined) {
+            this.registerUri = localStorage.getItem("registerUri");
+        }
+        const url = this.registerUri;
+        console.log('url = '+url);
+
+        let bearerToken = 'Basic '+btoa(environment.oauth2.client_id+":"+this.getCatClientSecret());
+
+        let headers = new HttpHeaders({'Authorization': bearerToken });
+        headers= headers.append('Content-Type','application/json');
+        headers = headers.append('Accept','application/json');
+
+
+        let payload = JSON.stringify({
+            client_name : clientName ,
+            redirect_uris : redirect,
+            client_uri : clientURI,
+            grant_types: ["authorization_code"],
+            scope: "user/*.read user/*.read profile"
+        });
+
+        console.log(payload);
+
+        return this.http.post(url,payload,{ 'headers' : headers }  );
+    }
 
   performRegister() {
     const url = this.registerUri;

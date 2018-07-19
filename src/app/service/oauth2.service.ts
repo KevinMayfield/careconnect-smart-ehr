@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {environment} from "../../environments/environment";
+import {HttpHeaders} from "@angular/common/http";
 
 @Injectable()
 export class Oauth2Service {
@@ -48,5 +49,9 @@ export class Oauth2Service {
     let retStr = helper.decodeToken(token)
     return retStr;
   }
+
+
+
+
 
 }

@@ -33,7 +33,8 @@
             </mat-error>
         </div>
         Note: If you provide one or more redirect URIs, your client code must send one of the provided values when performing OAuth2 authorization or you will receive an "Invalid redirect" error.
-        <td-file-upload #singleFileUpload  (select)="selectEvent($event)" (upload)="uploadEvent($event)" (cancel)="cancelEvent()">
+        <br>
+        <td-file-upload #singleFileUpload formContolName="files" (select)="selectEvent($event)" (upload)="uploadEvent($event)" (cancel)="cancelEvent()">
             <mat-icon>file_upload</mat-icon><span>{{ singleFileUpload.value?.name }}</span>
             <ng-template td-file-input-label>
                 <mat-icon>attach_file</mat-icon>
@@ -44,14 +45,14 @@
             </ng-template>
         </td-file-upload>
         <br>
-        <p>Form value: {{ registerForm.value | json }}</p>
+
     </form>
 
-    <!-- formControlName="files" -->
+    <p>Form value: {{ registerForm.value | json }}</p>
 
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancel</button>
     <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-    <button mat-button [disabled]="registerForm.invalid" [mat-dialog-close]="true">Ok</button>
+    <button mat-button [disabled]="registerForm.invalid" (click)="registerApp()">Ok</button>
 </mat-dialog-actions>
