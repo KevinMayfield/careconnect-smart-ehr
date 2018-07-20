@@ -21,8 +21,47 @@ export class SmartAppsComponent implements OnInit {
     this.cards = environment.apps;
 
 
+    /*
+
+    {id: 3, clientId: "hspc_appointments", clientName: "HSPC Appointments", logoUri: "https://content.hspconsortium.org/images/hspc-appointments/logo/appointments.png", scope: Array(13), …}
+clientDescription
+:
+null
+clientId
+:
+"hspc_appointments"
+clientName
+:
+"HSPC Appointments"
+id
+:
+3
+logoUri
+:
+"https://content.hspconsortium.org/images/hspc-appointments/logo/appointments.png"
+scope
+:
+(13) ["launch/patient", "openid", "profile", "user/*.read", "launch", "user/*.*", "patient/Patient.read", "patient/*.read", "offline_access", "patient/Patient.write", "patient/Observation.read", "patient/*.write", "patient/Observation.write"]
+__proto__
+:
+Object
+     */
+
     this.fhirService.getClients().subscribe( clients => {
-        console.log(clients);
+        //console.log(clients);
+        for (let client of clients) {
+
+            if (client.scope.includes("launch")) {
+                console.log(client);
+                let newclient = {
+                    name: client.clientName,
+                    image: client.logoUri,
+                    url: 'http://127.0.0.1:8000/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch=',
+                    notes: 'The widely-used Reynolds Risk Score is used to estimate the 10-year cardiovascular risk of an individual. For patients and clinicians alike, this calculation is often reported in an esoteric, hard-to-read lab report. [Uses LOINC]',
+                    source : 'Boston Children Hospital'
+                }
+            }
+        }
     })
 
   }

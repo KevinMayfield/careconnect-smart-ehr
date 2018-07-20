@@ -163,7 +163,7 @@ export class FhirService {
           this.registerUri = localStorage.getItem("registerUri");
       }
       let url = this.registerUri.replace('register','');
-      url = url + 'client/api';
+      url = url + 'api/clients';
       console.log('url = '+url);
 
       let bearerToken = 'Basic '+btoa(environment.oauth2.client_id+":"+this.getCatClientSecret());

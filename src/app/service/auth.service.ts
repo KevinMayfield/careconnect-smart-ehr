@@ -92,11 +92,12 @@ export class AuthService {
 
     }
     setCookie() {
-
+        console.log('cookie domain: '+this.getCookieDomain());
        if (this._cookieService.get('hspc-token') !== undefined) {
            this._cookieService.put('ccri-token', this._cookieService.get('hspc-token'), {
                domain: this.getCookieDomain(),
                path: '/',
+
                expires: new Date((new Date()).getTime() + 3 * 60000)
            });
        } else {
