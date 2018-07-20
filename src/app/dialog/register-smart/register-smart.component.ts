@@ -93,16 +93,47 @@ export class RegisterSmartComponent implements OnInit {
             this.registerForm.controls['appSupplier'].value
         ).subscribe( response => {
 
-                console.log(response);
-                const dialogConfig = new MatDialogConfig();
+            console.log(response);
+            let endpoint: fhir.Endpoint = {
+                resourceType: 'Endpoint',
+                identifier: [ {
+                    system: 'https://fhir.leedsth.nhs.uk/Id/clientId',
+                    value: response.client_id
+                }],
+                status: 'active',
+                "connectionType": {
+                    "system": "http://hl7.org/fhir/endpoint-connection-type",
+                    "code": "direct-project"
+                },
+                name: this.registerForm.controls['appName'].value,
+                payloadType: [
+                    {
+                        "coding": [
+                            {
+                                "system": "http://hl7.org/fhir/resource-types",
+                                "code": "Endpoint"
+                            }
+                        ]
+                    }
+                ],
+                address: this.registerForm.controls['appLaunch'].value
+            };
 
-                dialogConfig.disableClose = true;
-                dialogConfig.autoFocus = true;
-                dialogConfig.data = {
-                    id: 1,
-                    response: response
-                };
-                this.dialog.open( RegisterSmartSecretComponent, dialogConfig);
+            this.fhirService.postEndpoint(endpoint).subscribe( resp => {
+                    console.log(resp);
+                    const dialogConfig = new MatDialogConfig();
+
+                    dialogConfig.disableClose = true;
+                    dialogConfig.autoFocus = true;
+                    dialogConfig.data = {
+                        id: 1,
+                        response: response
+                    };
+                    this.dialog.open(RegisterSmartSecretComponent, dialogConfig);
+                }
+            )
+
+
 
             }
             , (error: any) => {

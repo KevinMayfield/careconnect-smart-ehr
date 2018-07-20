@@ -388,6 +388,16 @@ export class FhirService {
     return this.http.post<fhir.Bundle>(url,document,{ 'headers' :headers});
   }
 
+    postEndpoint(endpoint: fhir.Endpoint) : Observable<fhir.Endpoint> {
+
+        let headers :HttpHeaders = this.getEPRHeaders(false);
+        headers.append('Content-Type','application/fhir+json');
+        headers.append('Prefer','return=representation');
+        const url = this.getEPRUrl() + `/Endpoint`;
+
+        return this.http.post<fhir.Endpoint>(url,endpoint,{ 'headers' :headers});
+    }
+
   postBundleValidate(document: any,contentType : string) : Observable<any> {
 
     let headers :HttpHeaders = this.getEPRHeaders(false);
