@@ -3,6 +3,7 @@
     <mat-nav-list [tdLayoutClose]="!media.query('gt-sm')">
       <span *ngFor="let item of btnRoutes">
         <a mat-list-item tdLayoutToggle (click)="menuClick(item.href)"><mat-icon matListIcon>{{item.icon}}</mat-icon>{{item.title}}</a>
+          <a mat-list-item tdLayoutToggle (click)="configuration()"><mat-icon>settings</mat-icon> SMART/OAuth2 Config </a>
       </span>
         <a mat-list-item (click)="registerApp()"><mat-icon>add_circle</mat-icon> Register SMART App</a>
       <span *ngFor="let item of routes">

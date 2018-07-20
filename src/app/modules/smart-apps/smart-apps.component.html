@@ -1,8 +1,10 @@
-<div layout="row" layout-fill>
-    <mat-toolbar>
-        <button mat-icon-button color="accent" (click)="registerApp()"><mat-icon>add_circle</mat-icon> Register SMART App</button>
-    </mat-toolbar>
+<div td-toolbar-content flex layout="row" layout-align="start">
+<mat-toolbar>
+        <button fxFlex mat-icon-button color="accent" (click)="registerApp()"><mat-icon>add_circle</mat-icon> Register SMART App</button>
+        <button fxFlex mat-icon-button color="accent" (click)="configuration()"><mat-icon>settings</mat-icon> Config </button>
+</mat-toolbar>
 </div>
+<br>
 <mat-grid-list cols="4"  rowHeight="250px" gutterSize="20px">
     <mat-grid-tile  *ngFor="let card of cards">
         <mat-card [style.minHeight]="'100%'" [style.minWidth]="'100%'">
@@ -17,7 +19,7 @@
               </mat-card-content>
 
             <mat-card-actions>
-                  <button mat-icon-button color="accent" (click)="smartApp(card.url)"><mat-icon>play_circle_filled</mat-icon> Launch</button>
+                  <button mat-icon-button color="accent" (click)="smartApp(card)"><mat-icon>play_circle_filled</mat-icon> Launch</button>
             </mat-card-actions>
         </mat-card>
     </mat-grid-tile>

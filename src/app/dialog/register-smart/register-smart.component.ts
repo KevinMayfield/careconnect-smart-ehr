@@ -36,6 +36,10 @@ export class RegisterSmartComponent implements OnInit {
 
   appRedirect;
 
+  appDescription;
+
+  appSupplier: string;
+
   files: File | FileList;
 
 
@@ -50,7 +54,9 @@ export class RegisterSmartComponent implements OnInit {
           'appName' : [ new FormControl(this.appName), Validators.required ],
           'appLaunch' : [ new FormControl(this.appLaunch), [ Validators.required, Validators.pattern(reg)] ],
           'appRedirect' : [ new FormControl(this.appRedirect)  ],
-          'appLogo' : [ new FormControl(this.appLogo)  ]
+          'appLogo' : [ new FormControl(this.appLogo)  ],
+          'appDescription' : [ new FormControl(this.appDescription) , Validators.required  ],
+          'appSupplier' : [ new FormControl(this.appSupplier), Validators.required   ],
        //   'files': [ new FormControl(this.files), Validators.required ]
       });
 
@@ -80,7 +86,12 @@ export class RegisterSmartComponent implements OnInit {
         if (this.registerForm.controls['appRedirect'].value !== '') {
             redirects= this.registerForm.controls['appRedirect'].value.split('/n');
         };
-        this.fhirService.performRegisterSMARTApp(this.registerForm.controls['appName'].value , this.registerForm.controls['appLaunch'].value , redirects , this.registerForm.controls['appLogo'].value).subscribe( response => {
+        this.fhirService.performRegisterSMARTApp(this.registerForm.controls['appName'].value,
+            this.registerForm.controls['appLaunch'].value,
+            redirects,
+            this.registerForm.controls['appLogo'].value,
+            this.registerForm.controls['appSupplier'].value
+        ).subscribe( response => {
 
                 console.log(response);
                 const dialogConfig = new MatDialogConfig();

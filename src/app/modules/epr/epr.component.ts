@@ -192,6 +192,13 @@ export class EprComponent implements AfterViewInit {
 
   }
 
+    configuration() {
+        this.authService.setCookie();
+        let url:string = localStorage.getItem("registerUri");
+        url = url.replace('register','');
+        window.open(url, "_blank");
+    }
+
   getLastName(patient :fhir.Patient) : String {
     if (patient == undefined) return "";
     if (patient.name == undefined || patient.name.length == 0)

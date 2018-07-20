@@ -42,6 +42,15 @@
                 Valid url is <strong>required</strong>
             </mat-error>
         </div>
+        <mat-form-field>
+            <textarea matInput placeholder="Supplier Name/ Contact Information" formControlName="appSupplier" value="{{appSupplier}}"></textarea>
+        </mat-form-field>
+        <div *ngIf="registerForm.controls['appSupplier'].errors && registerForm.controls['appRedirect'].touched">
+            <mat-error *ngIf="registerForm.controls['appSupplier'].hasError('required')">
+                Supplier name or contact details is <strong>required</strong>
+            </mat-error>
+        </div>
+
         <!--
         <td-file-upload #singleFileUpload formContolName="files" (select)="selectEvent($event)" (upload)="uploadEvent($event)" (cancel)="cancelEvent()">
             <mat-icon>file_upload</mat-icon><span>{{ singleFileUpload.value?.name }}</span>
@@ -57,7 +66,7 @@
 
     </form>
 
-    <p>Form value: {{ registerForm.value | json }}</p>
+  <!--  <p>Form value: {{ registerForm.value | json }}</p> -->
 
 </mat-dialog-content>
 <mat-dialog-actions>
