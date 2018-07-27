@@ -5,8 +5,8 @@
 </mat-toolbar>
 </div>
 <br>
-<mat-grid-list cols="4"  rowHeight="250px" gutterSize="20px">
-    <mat-grid-tile  *ngFor="let card of cards">
+<mat-grid-list cols="4" flex rowHeight="230px" gutterSize="20px" layout-align="start center">
+    <mat-grid-tile *ngFor="let card of cards" la>
         <mat-card [style.minHeight]="'100%'" [style.minWidth]="'100%'">
             <mat-card-header>
                 <img mat-card-avatar src="{{card.image}}">
@@ -19,7 +19,12 @@
               </mat-card-content>
 
             <mat-card-actions>
-                  <button mat-icon-button color="accent" (click)="smartApp(card)"><mat-icon>play_circle_filled</mat-icon> Launch</button>
+                  <button fxFlex mat-icon-button
+                          color="accent" (click)="smartApp(card)"><mat-icon>play_circle_filled</mat-icon> Launch</button>
+                <span *ngIf="card.url === ''">
+                     <br>
+                     <button fxFlex mat-icon-button color="accent" (click)="smartAppConfig(card)"><mat-icon>settings</mat-icon> Config</button>
+                </span>
             </mat-card-actions>
         </mat-card>
     </mat-grid-tile>

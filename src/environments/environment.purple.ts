@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   oauth2 : {
-     eprUrl : 'https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3',
+     eprUrl : 'https://purple.testlab.nhs.uk/ccri-smartonfhir/STU3',
      client_id : 'nhs-smart-ehr',
      client_secret : 'SMART_OAUTH2_CLIENT_SECRET',
      cookie_domain: 'purple.testlab.nhs.uk'
