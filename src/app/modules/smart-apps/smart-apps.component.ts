@@ -64,7 +64,7 @@ export class SmartAppsComponent implements OnInit {
 
         if (card.url !== '') {
 
-            this.fhirService.launchSMART('child_measurements', '4ae23017813e417d937e3ba21974581', this.eprService.patient.id).subscribe(response => {
+            this.fhirService.launchSMART(card.clientId, '4ae23017813e417d937e3ba21974581', this.eprService.patient.id).subscribe(response => {
                     launch = response.launch_id;
                     console.log("Returned Launch = " + launch);
                 },
@@ -76,8 +76,28 @@ export class SmartAppsComponent implements OnInit {
                 }
             );
         } else {
-            this.fhirService.getClient(card.id).subscribe( result => {
+            this.fhirService.getEndpoints(card.clientId).subscribe( result => {
                 console.log(result);
+                let bundle: fhir.Bundle = result;
+                if (bundle.entry !== undefined) {
+                    for (const entry of bundle.entry) {
+                        let resource: fhir.Resource = entry.resource;
+                        if (resource.resourceType === 'Endpoint') {
+                            let endpoint: fhir.Endpoint = <fhir.Endpoint> resource;
+                            this.fhirService.launchSMART(card.clientId, '4ae23017813e417d937e3ba21974581', this.eprService.patient.id).subscribe(response => {
+                                    launch = response.launch_id;
+                                    console.log("Returned Launch = " + launch);
+                                },
+                                (err) => {
+                                    console.log(err);
+                                },
+                                () => {
+                                    window.open(endpoint.address + '?iss=' + this.fhirService.getEPRUrl() + '&launch=' + launch, "_blank");
+                                }
+                            );
+                        }
+                    }
+                }
             })
         }
 

@@ -46,7 +46,7 @@ export class RegisterSmartComponent implements OnInit {
 
   ngOnInit() {
 
-      const reg = '^https?:\\/\\/\\w+(:[0-9]*)?([-a-zA-Z0-9@:%._\\+~#=]{2,256})?[\\/a-zA-Z0-9_]+$';
+      const reg = '^https?:\\/\\/\\w+(:[0-9]*)?([-a-zA-Z0-9@:%._\\+~#=]{2,256})?[\\/a-zA-Z0-9_-]+$';
 
       console.log('Init Called TREE');
 

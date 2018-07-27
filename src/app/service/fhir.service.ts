@@ -154,6 +154,14 @@ export class FhirService {
 
   }
 
+    getEndpoints(clientId: string): Observable<fhir.Bundle> {
+
+        const url = this.getEPRUrl()  + `/Endpoint?identifier=${clientId}`;
+
+        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+
+    }
+
     getClient(clientId) {
 
         this.authService.setCookie();

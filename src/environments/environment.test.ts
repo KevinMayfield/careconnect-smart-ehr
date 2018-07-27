@@ -12,12 +12,12 @@ export const environment = {
     client_secret : 'KEYCLOAK_CLIENT_SECRET',
     client_id : 'ccri-cat'
   },
-    login : 'LOGIN_URL',
+    login : 'https://yellow.testlab.nhs.uk/cat/login',
   oauth2 : {
-    eprUrl : 'https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3',
+    eprUrl : 'https://yellow.testlab.nhs.uk/ccri-smartonfhir/STU3',
     client_id : 'nhs-smart-ehr',
     client_secret : 'SMART_OAUTH2_CLIENT_SECRET',
-    cookie_domain: 'purple.testlab.nhs.uk'
+    cookie_domain: 'yellow.testlab.nhs.uk'
   },
 
     apps: [
