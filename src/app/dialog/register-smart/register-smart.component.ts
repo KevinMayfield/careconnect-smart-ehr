@@ -1,5 +1,5 @@
 import {Component, Inject, Input, OnInit, ViewContainerRef} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {FhirService} from "../../service/fhir.service";
 
@@ -16,13 +16,21 @@ export class RegisterSmartComponent implements OnInit {
 
     registerForm : FormGroup;
 
+    endpoint: fhir.Endpoint;
+
   constructor(
       public dialog: MatDialog,
       public dialogRef: MatDialogRef<RegisterSmartComponent>,
     private _formBuilder: FormBuilder,
-    private fhirService: FhirService
-  )
-     {
+    private fhirService: FhirService,
+    @Inject(MAT_DIALOG_DATA) data) {
+
+    if (data !== undefined && data.endpoint !== undefined) {
+        this.endpoint = data.endpoint;
+        this.edit = true;
+        this.appName = data.endpoint.name;
+        this.appLaunch = data.endpoint.address;
+    }
   }
 
   @Input()
@@ -40,6 +48,8 @@ export class RegisterSmartComponent implements OnInit {
 
   appSupplier: string;
 
+  edit:boolean = false;
+
   files: File | FileList;
 
 
@@ -50,15 +60,29 @@ export class RegisterSmartComponent implements OnInit {
 
       console.log('Init Called TREE');
 
-      this.registerForm = this._formBuilder.group({
-          'appName' : [ new FormControl(this.appName), Validators.required ],
-          'appLaunch' : [ new FormControl(this.appLaunch), [ Validators.required, Validators.pattern(reg)] ],
-          'appRedirect' : [ new FormControl(this.appRedirect)  ],
-          'appLogo' : [ new FormControl(this.appLogo)  ],
-          'appDescription' : [ new FormControl(this.appDescription) , Validators.required  ],
-          'appSupplier' : [ new FormControl(this.appSupplier), Validators.required   ],
-       //   'files': [ new FormControl(this.files), Validators.required ]
-      });
+
+
+      if (this.edit) {
+          this.registerForm = this._formBuilder.group({
+              'appName' : [ new FormControl(this.appName), Validators.required ],
+              'appLaunch' : [ new FormControl(this.appLaunch), [ Validators.required, Validators.pattern(reg)] ],
+              'appRedirect' : [ new FormControl(this.appRedirect)  ],
+              'appLogo' : [ new FormControl(this.appLogo)  ],
+              'appDescription' : [ new FormControl(this.appDescription)  ],
+              'appSupplier' : [ new FormControl(this.appSupplier)  ],
+
+          });
+      } else {
+          this.registerForm = this._formBuilder.group({
+              'appName' : [ new FormControl(this.appName), Validators.required ],
+              'appLaunch' : [ new FormControl(this.appLaunch), [ Validators.required, Validators.pattern(reg)] ],
+              'appRedirect' : [ new FormControl(this.appRedirect)  ],
+              'appLogo' : [ new FormControl(this.appLogo)  ],
+              'appDescription' : [ new FormControl(this.appDescription) , Validators.required  ],
+              'appSupplier' : [ new FormControl(this.appSupplier), Validators.required   ],
+
+          });
+      }
 
   }
 
@@ -79,76 +103,111 @@ export class RegisterSmartComponent implements OnInit {
         this.fileUploadMsg = 'No file uploaded yet.';
     }
 
+    getDisabledValue() {
+        return this.edit;
+    }
+
     registerApp() {
         console.log('register SMART App');
 
-        let redirects: string[] = [  ];
-        if (this.registerForm.controls['appRedirect'].value !== '') {
-            redirects= this.registerForm.controls['appRedirect'].value.split('/n');
-        };
-        this.fhirService.performRegisterSMARTApp(this.registerForm.controls['appName'].value,
-            this.registerForm.controls['appLaunch'].value,
-            redirects,
-            this.registerForm.controls['appLogo'].value,
-            this.registerForm.controls['appSupplier'].value
-        ).subscribe( response => {
+        let redirects: string[] = [];
 
-            console.log(response);
-            let endpoint: fhir.Endpoint = {
-                resourceType: 'Endpoint',
-                identifier: [ {
-                    system: 'https://fhir.leedsth.nhs.uk/Id/clientId',
-                    value: response.client_id
-                }],
-                status: 'active',
-                "connectionType": {
-                    "system": "http://hl7.org/fhir/endpoint-connection-type",
-                    "code": "direct-project"
-                },
-                name: this.registerForm.controls['appName'].value,
-                payloadType: [
-                    {
-                        "coding": [
+        if (!this.edit) {
+            if (this.registerForm.controls['appRedirect'].value !== '') {
+                redirects = this.registerForm.controls['appRedirect'].value.split('/n');
+            }
+            ;
+            this.fhirService.performRegisterSMARTApp(this.registerForm.controls['appName'].value,
+                this.registerForm.controls['appLaunch'].value,
+                redirects,
+                this.registerForm.controls['appLogo'].value,
+                this.registerForm.controls['appSupplier'].value
+            ).subscribe(response => {
+
+                    console.log(response);
+
+
+                    let endpoint: fhir.Endpoint = {
+                        resourceType: 'Endpoint',
+                        identifier: [{
+                            system: 'https://fhir.leedsth.nhs.uk/Id/clientId',
+                            value: response.client_id
+                        }],
+                        status: 'active',
+                        "connectionType": {
+                            "system": "http://hl7.org/fhir/endpoint-connection-type",
+                            "code": "direct-project"
+                        },
+                        name: this.registerForm.controls['appName'].value,
+                        payloadType: [
                             {
-                                "system": "http://hl7.org/fhir/resource-types",
-                                "code": "Endpoint"
+                                "coding": [
+                                    {
+                                        "system": "http://hl7.org/fhir/resource-types",
+                                        "code": "Endpoint"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                ],
-                address: this.registerForm.controls['appLaunch'].value
-            };
+                        ],
+                        address: this.registerForm.controls['appLaunch'].value
+                    };
 
-            this.fhirService.postEndpoint(endpoint).subscribe( resp => {
+                    this.fhirService.postEndpoint(endpoint).subscribe(resp => {
+                            console.log(resp);
+                            const dialogConfig = new MatDialogConfig();
+
+                            dialogConfig.disableClose = true;
+                            dialogConfig.autoFocus = true;
+                            dialogConfig.data = {
+                                id: 1,
+                                response: response
+                            };
+                            this.dialog.open(RegisterSmartSecretComponent, dialogConfig);
+                        }
+                    )
+
+
+                }
+                , (error: any) => {
+                    console.log("Register Response Error = " + error);
+                }
+                , () => {
+
+                    console.log("Register complete()");
+                    this.dialogRef.close();
+                }
+            );
+
+        } else {
+
+            // No edit of OAuth2 details at present
+
+            this.endpoint.name = this.registerForm.controls['appName'].value;
+            this.endpoint.address = this.registerForm.controls['appLaunch'].value;
+
+            this.fhirService.putEndpoint(this.endpoint).subscribe(resp => {
                     console.log(resp);
                     const dialogConfig = new MatDialogConfig();
 
                     dialogConfig.disableClose = true;
                     dialogConfig.autoFocus = true;
                     dialogConfig.data = {
-                        id: 1,
-                        response: response
+                        id: 1
                     };
                     this.dialog.open(RegisterSmartSecretComponent, dialogConfig);
-                }
+                },
+                (error: any) => {
+                    console.log("Register Response Error = " + error);
+                },
+                () => {
+                    this.dialogRef.close();
+            }
             )
-
-
-
-            }
-            , (error: any) => {
-                console.log("Register Response Error = "+error);
-            }
-            ,() => {
-
-                console.log("Register complete()");
-                this.dialogRef.close();
-            }
-        );
-
+        }
     }
 
 
- }
+
+}
 
 

@@ -10,6 +10,9 @@
         <mat-card [style.minHeight]="'100%'" [style.minWidth]="'100%'">
             <mat-card-header>
                 <img mat-card-avatar src="{{card.image}}">
+                <span *ngIf="card.url === ''">
+                     <button mat-icon-button color="accent" (click)="smartAppConfig(card)"><mat-icon>settings</mat-icon></button>
+                </span>
                 <mat-card-title>{{card.name}}</mat-card-title>
                 <mat-card-subtitle>{{card.source}}</mat-card-subtitle>
             </mat-card-header>
@@ -18,13 +21,11 @@
                 {{card.notes}}
               </mat-card-content>
 
-            <mat-card-actions>
+            <mat-card-actions >
+
                   <button fxFlex mat-icon-button
                           color="accent" (click)="smartApp(card)"><mat-icon>play_circle_filled</mat-icon> Launch</button>
-                <span *ngIf="card.url === ''">
-                     <br>
-                     <button fxFlex mat-icon-button color="accent" (click)="smartAppConfig(card)"><mat-icon>settings</mat-icon> Config</button>
-                </span>
+
             </mat-card-actions>
         </mat-card>
     </mat-grid-tile>

@@ -103,6 +103,35 @@ export class SmartAppsComponent implements OnInit {
 
     }
 
+    smartAppConfig(card) {
+
+        // Get data from endpoint and start up the dialog
+
+        this.fhirService.getEndpoints(card.clientId).subscribe( result => {
+
+            let bundle: fhir.Bundle = result;
+            if (bundle.entry !== undefined) {
+                for (const entry of bundle.entry) {
+                    let resource: fhir.Resource = entry.resource;
+                    if (resource.resourceType === 'Endpoint') {
+                        let endpoint: fhir.Endpoint = <fhir.Endpoint> resource;
+                        const dialogConfig = new MatDialogConfig();
+
+                        dialogConfig.disableClose = true;
+                        dialogConfig.autoFocus = true;
+
+                        dialogConfig.data = {
+                            endpoint: endpoint
+                        };
+                        let resourceDialog : MatDialogRef<RegisterSmartComponent> = this.dialog.open( RegisterSmartComponent, dialogConfig);
+                    }
+                }
+            }
+        })
+
+    }
+
+
     registerApp() {
         const dialogConfig = new MatDialogConfig();
 
