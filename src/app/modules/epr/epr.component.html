@@ -116,6 +116,9 @@
               <a mat-list-item (click)="selectSection('prescriptions')" ngbTooltip="Medications"><mat-icon>colorize</mat-icon>
                 <span *ngIf="!miniNav" class="push-left-sm">Medications</span>
               </a>
+                  <a mat-list-item (click)="selectSection('contacts')" ngbTooltip="Contacts"><mat-icon>people</mat-icon>
+                <span *ngIf="!miniNav" class="push-left-sm">Contacts</span>
+              </a>
                 <mat-divider></mat-divider>
                 <a mat-list-item (click)="smartApps()" ngbTooltip="SMART on FHIR"><mat-icon>apps</mat-icon>
                     <span *ngIf="!miniNav" class="push-left-sm">SMART Apps</span>

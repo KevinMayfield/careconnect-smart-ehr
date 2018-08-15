@@ -548,7 +548,13 @@ export class FhirService {
 
   }
 
+    getRelatedPersons(patientId: string): Observable<fhir.Bundle> {
 
+        const url = this.getEPRUrl()  + `/RelatedPerson?patient=${patientId}`;
+
+        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+
+    }
 
   getEPRObservationsByCode(patientId: number, code:string, date : string): Observable<fhir.Bundle> {
 

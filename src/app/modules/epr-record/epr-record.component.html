@@ -27,6 +27,13 @@
   </mat-card-content>
 </mat-card>
 
+<mat-card *ngIf="section== 'contacts'">
+  <mat-card-title>Contacts</mat-card-title>
+  <mat-card-content>
+    <app-related-person [patientId]="patientId" ></app-related-person>
+  </mat-card-content>
+</mat-card>
+
 <mat-card *ngIf="section== 'careplan'">
   <mat-card-title>Care Plans</mat-card-title>
   <mat-card-content>
