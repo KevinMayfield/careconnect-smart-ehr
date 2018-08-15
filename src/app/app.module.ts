@@ -93,6 +93,7 @@ import { SmartAppsComponent } from './modules/smart-apps/smart-apps.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {RegisterSmartComponent} from "./dialog/register-smart/register-smart.component";
 import {RegisterSmartSecretComponent} from "./dialog/register-smart-secret/register-smart-secret.component";
+import { CarePlanComponent } from './component/care-plan/care-plan.component';
 
 @NgModule({
   declarations: [
@@ -150,7 +151,8 @@ import {RegisterSmartSecretComponent} from "./dialog/register-smart-secret/regis
     PingComponent,
     SmartAppsComponent,
       RegisterSmartComponent,
-      RegisterSmartSecretComponent
+      RegisterSmartSecretComponent,
+      CarePlanComponent
 
   ],
    entryComponents: [

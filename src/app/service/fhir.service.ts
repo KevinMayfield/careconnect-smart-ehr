@@ -454,6 +454,14 @@ export class FhirService {
 
   }
 
+    getCarePlans(patientId: string): Observable<fhir.Bundle> {
+
+        const url = this.getEPRUrl()  + `/CarePlan?patient=${patientId}`;
+
+        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+
+    }
+
   getResource(reference : string ) : Observable<fhir.Resource> {
     const url = this.getEPRUrl()  + '/' + reference;
 

@@ -101,7 +101,9 @@
                 <a mat-list-item (click)="selectSection('documents')" ngbTooltip="Docs"><mat-icon>note</mat-icon>
                   <span *ngIf="!miniNav" class="push-left-sm">Documents</span>
                 </a>
-
+                <a mat-list-item (click)="selectSection('careplan')" ngbTooltip="Care Plans"><mat-icon>map</mat-icon>
+                    <span *ngIf="!miniNav" class="push-left-sm">Care Plans</span>
+                </a>
                 <a mat-list-item (click)="selectSection('encounters')" ngbTooltip="Visits"><mat-icon>insert_invitation</mat-icon>
                   <span *ngIf="!miniNav" class="push-left-sm">Encounters</span>
                 </a>

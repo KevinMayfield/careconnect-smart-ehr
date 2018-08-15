@@ -13,8 +13,8 @@
 </mat-card>
 
 
-<mat-card *ngIf="section== 'immunisations' ">
-  <mat-card-title>Immunisation</mat-card-title>
+<mat-card *ngIf="section == 'prescriptions' || section== 'immunisations' ">
+  <mat-card-title>Immunisations</mat-card-title>
   <mat-card-content>
     <app-immunisation [patientId]="patientId" ></app-immunisation>
   </mat-card-content>
@@ -24,6 +24,13 @@
   <mat-card-title>Conditions</mat-card-title>
   <mat-card-content>
     <app-condition [patientId]="patientId" ></app-condition>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="section== 'careplan'">
+  <mat-card-title>Care Plans</mat-card-title>
+  <mat-card-content>
+    <app-care-plan [patientId]="patientId" ></app-care-plan>
   </mat-card-content>
 </mat-card>
 
