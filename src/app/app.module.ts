@@ -25,7 +25,7 @@ import {ImgViewerComponent} from "./component/binary/img-viewer/img-viewer.compo
 import {OrganisationSearchComponent} from "./component/organisation-search/organisation-search.component";
 import {ViewDocumentSectionComponent} from "./component/binary/composition-view-section/view-document-section.component";
 import {PractitionerRoleDialogComponent} from "./dialog/practitioner-role-dialog/practitioner-role-dialog.component";
-import {AllergyIntolleranceComponent} from "./component/allergy-intollerance/allergy-intollerance.component";
+import {AllergyIntoleranceComponent} from "./component/allergy-intolerance/allergy-intolerance.component";
 import {DocumentReferenceComponent} from "./component/document-reference/document-reference.component";
 import {OrganisationDialogComponent} from "./dialog/organisation-dialog/organisation-dialog.component";
 
@@ -93,6 +93,8 @@ import { SmartAppsComponent } from './modules/smart-apps/smart-apps.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {RegisterSmartComponent} from "./dialog/register-smart/register-smart.component";
 import {RegisterSmartSecretComponent} from "./dialog/register-smart-secret/register-smart-secret.component";
+import { CarePlanComponent } from './component/care-plan/care-plan.component';
+import { RelatedPersonComponent } from './component/related-person/related-person.component';
 
 @NgModule({
   declarations: [
@@ -110,7 +112,7 @@ import {RegisterSmartSecretComponent} from "./dialog/register-smart-secret/regis
     ConditionComponent,
     ProcedureComponent,
     ObservationComponent,
-    AllergyIntolleranceComponent,
+    AllergyIntoleranceComponent,
     EncounterComponent,
 
     MedicationRequestComponent,
@@ -150,7 +152,9 @@ import {RegisterSmartSecretComponent} from "./dialog/register-smart-secret/regis
     PingComponent,
     SmartAppsComponent,
       RegisterSmartComponent,
-      RegisterSmartSecretComponent
+      RegisterSmartSecretComponent,
+      CarePlanComponent,
+      RelatedPersonComponent
 
   ],
    entryComponents: [

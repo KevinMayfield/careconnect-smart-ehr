@@ -119,6 +119,7 @@ export class EprComponent implements AfterViewInit {
     this.subPatient = this.eprService.getPatientChangeEmitter()
       .subscribe( patient => {
         this.patient = patient;
+        this.section = 'summary';
       });
      this.eprService.getSectionChangeEvent()
       .subscribe( section => {

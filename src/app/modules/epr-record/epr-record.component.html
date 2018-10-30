@@ -13,8 +13,8 @@
 </mat-card>
 
 
-<mat-card *ngIf="section== 'immunisations' ">
-  <mat-card-title>Immunisation</mat-card-title>
+<mat-card *ngIf="section == 'prescriptions' || section== 'immunisations' ">
+  <mat-card-title>Immunisations</mat-card-title>
   <mat-card-content>
     <app-immunisation [patientId]="patientId" ></app-immunisation>
   </mat-card-content>
@@ -24,6 +24,20 @@
   <mat-card-title>Conditions</mat-card-title>
   <mat-card-content>
     <app-condition [patientId]="patientId" ></app-condition>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="section== 'contacts'">
+  <mat-card-title>Contacts</mat-card-title>
+  <mat-card-content>
+    <app-related-person [patientId]="patientId" ></app-related-person>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="section== 'careplan'">
+  <mat-card-title>Care Plans</mat-card-title>
+  <mat-card-content>
+    <app-care-plan [patientId]="patientId" ></app-care-plan>
   </mat-card-content>
 </mat-card>
 
@@ -56,9 +70,9 @@
 </mat-card>
 
 <mat-card *ngIf="section== 'allergy' || section== 'summary' ">
-  <mat-card-title>Allergy and Intollerances</mat-card-title>
+  <mat-card-title>Allergy and Intolerances</mat-card-title>
   <mat-card-content>
-    <app-allergy-intollerance [patientId]="patientId" ></app-allergy-intollerance>
+    <app-allergy-intolerance [patientId]="patientId" ></app-allergy-intolerance>
   </mat-card-content>
 </mat-card>
 

@@ -54,7 +54,7 @@
 
             </mat-nav-list>
             <button mat-button color="accent" (click)="selectSection('allergy')"  td-menu-footer>
-              See All Allergies and Intollerances
+              See All Allergies and Intolerances
             </button>
           </td-menu>
         </mat-menu>
@@ -101,7 +101,9 @@
                 <a mat-list-item (click)="selectSection('documents')" ngbTooltip="Docs"><mat-icon>note</mat-icon>
                   <span *ngIf="!miniNav" class="push-left-sm">Documents</span>
                 </a>
-
+                <a mat-list-item (click)="selectSection('careplan')" ngbTooltip="Care Plans"><mat-icon>map</mat-icon>
+                    <span *ngIf="!miniNav" class="push-left-sm">Care Plans</span>
+                </a>
                 <a mat-list-item (click)="selectSection('encounters')" ngbTooltip="Visits"><mat-icon>insert_invitation</mat-icon>
                   <span *ngIf="!miniNav" class="push-left-sm">Encounters</span>
                 </a>
@@ -113,6 +115,9 @@
               </a>
               <a mat-list-item (click)="selectSection('prescriptions')" ngbTooltip="Medications"><mat-icon>colorize</mat-icon>
                 <span *ngIf="!miniNav" class="push-left-sm">Medications</span>
+              </a>
+                  <a mat-list-item (click)="selectSection('contacts')" ngbTooltip="Contacts"><mat-icon>people</mat-icon>
+                <span *ngIf="!miniNav" class="push-left-sm">Contacts</span>
               </a>
                 <mat-divider></mat-divider>
                 <a mat-list-item (click)="smartApps()" ngbTooltip="SMART on FHIR"><mat-icon>apps</mat-icon>
